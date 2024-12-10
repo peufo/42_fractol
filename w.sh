@@ -44,6 +44,8 @@ watch() {
 				$PROG &
 				PROG_PID=$!
 			fi
+
+			trap 'kill "$PROG_PID" && return' 2
 		fi
 		sleep 0.1
 	done

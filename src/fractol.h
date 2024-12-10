@@ -6,7 +6,7 @@
 /*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/10 15:57:42 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:53:27 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,15 @@ typedef struct s_image
 	int		line_length;
 	int		endian;	
 }	t_image;
+typedef struct s_dot
+{
+	int	x;
+	int	y;
+}	t_dot;
+
 
 void	put_pixel(t_image *data, int x, int y, int color);
 void	init_image(void *mlx_ptr, t_image *img, int width, int height);
+void	draw_square(t_image *img,  t_dot position, t_dot size, int color);
 
 #endif

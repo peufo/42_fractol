@@ -6,7 +6,7 @@
 /*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/10 15:57:07 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/10 16:53:21 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,23 @@ void	put_pixel(t_image *img, int x, int y, int color)
 	offset = (y * img->line_length + x * img->bytes_per_pixel);
 	dst = img->addr + offset;
 	*(unsigned int*)dst = color;
+}
+
+void	draw_square(t_image *img,  t_dot position, t_dot size, int color)
+{
+	int	x;
+	int y;
+	int	end_x;
+	int	end_y;
+
+	end_x = position.x + size.x;
+	end_y = position.y + size.y;
+	x = position.x;
+	while (x < end_x)
+	{
+		y = position.y;
+		while (y < end_y)
+			put_pixel(img, x, y++, color);
+		x++;
+	}
 }
