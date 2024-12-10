@@ -12,16 +12,20 @@ success() {
 
 watch() {
 	STATE_A=""
+	PROG_PID=""
 	while [[ true ]]
 	do
 		STATE_B=$(get_state)
 		if [[ $STATE_A != $STATE_B ]]; then
 			STATE_A=$STATE_B
+			if [ $PROG_PID != "" ]; then
+				kill $PROG_PID
+			fi
 			clear
 			info "HEY BRO 👋 $(date)"
 			./sync.sh
 
-			NORM_ERROR=$(sed -e '/.*: OK!/d' <(norminette))
+			NORM_ERROR=$(sed -e '/.*: OK!/d' <(norminette ./src))
 			if [[ $NORM_ERROR == "" ]] ; then
 				success "\nNORMINETTE OK\n"
 			else
@@ -36,7 +40,9 @@ watch() {
 				warning "COMPILATION FAILED"
 			else
 				success "COMPILATION OK"
-				valgrind --leak-check=full --track-origins=yes --log-file=leaks.log -s $PROG
+				#valgrind --leak-check=full --track-origins=yes --log-file=leaks.log -s $PROG
+				$PROG &
+				PROG_PID=$!
 			fi
 		fi
 		sleep 0.1
@@ -49,7 +55,7 @@ get_state() {
 	else
 		MD5="md5"
 	fi
-	echo $(find -L . -type f -name "*.[ch]" -exec $MD5 {} \;)
+	echo $(find -L ./src -type f -name "*.[ch]" -exec $MD5 {} \;)
 }
 
 watch

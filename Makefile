@@ -1,7 +1,7 @@
 NAME			=	fractol
 DIR_SRC			=	./src
 DIR_BUILD		=	./build
-SOURCES			=	main.c 
+SOURCES			=	image.c main.c 
 SOURCES_NAME	=	$(basename $(SOURCES))
 OBJECTS			=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SOURCES_NAME)))
 FLAGS			=	-Wall -Wextra -Werror
@@ -13,8 +13,6 @@ LIBS_LINK_DIR	=	-L$(FT_PRINTF) -L$(LIBX) -L/usr/lib
 LIBS_LINK		=	-lftprintf -lmlx -lXext -lX11 -lm -lz
 
 all: $(NAME)
-
-bonus: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@make -C $(FT_PRINTF)
