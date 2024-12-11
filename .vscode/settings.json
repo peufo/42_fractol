@@ -1,8 +1,10 @@
 {
-    "files.associations": {
-        "fractol.h": "c",
-        "mlx.h": "c",
-        "ft_printf.h": "c",
-        "limits.h": "c"
-    }
+  "files.associations": {
+    "*.astro": "astro",
+    "fractol.h": "c",
+    "mlx.h": "c",
+    "ft_printf.h": "c",
+    "limits.h": "c",
+    "mlx_int.h": "c"
+  }
 }

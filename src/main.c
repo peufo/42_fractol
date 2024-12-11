@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/10 17:09:38 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:13:49 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	terminate(char *error)
+{
+	t_image	*img;
+
+	img = img_get(NULL);
+	if (img && img->view)
+	{
+		free(img->view);
+		img->view = NULL;
+	}
+	if (error)
+	{
+		ft_printf("Error: %s\n", error);
+		return (1);
+	}
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
@@ -21,18 +39,15 @@ int	main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1000, 700, "YOOOO");
-	
-	init_image(mlx, &img, 1000, 700);
-
-	draw_square(&img, (t_dot){ .x = 50, .y = 50}, (t_dot){400, 400}, 0x80ff0000);
-	draw_square(&img, (t_dot){ .x = 100, .y = 100}, (t_dot){400, 400}, 0x80ffff00);
-	draw_square(&img, (t_dot){ .x = 150, .y = 150}, (t_dot){400, 400}, 0x8000ff00);
-	draw_square(&img, (t_dot){ .x = 200, .y = 200}, (t_dot){400, 400}, 0x8000ffff);
-	draw_square(&img, (t_dot){ .x = 250, .y = 250}, (t_dot){400, 400}, 0x800000ff);
-
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_win = mlx_new_window(mlx, WINDOW_W, WINDOW_H, "FRAAAAACTOL");
+	img_init(mlx, &img, WINDOW_W, WINDOW_H);
+	img_draw_square(
+		&img,
+		(t_dot){0, 0},
+		(t_dot){WINDOW_W, WINDOW_H},
+		0xFFFFFF);
+	img_draw_square(&img, (t_dot){50, 50}, (t_dot){500, 500}, 0xFFF000);
+	mlx_put_image_to_window(mlx, mlx_win, img.data, 0, 0);
 	mlx_loop(mlx);
-
 	return (0);
 }
