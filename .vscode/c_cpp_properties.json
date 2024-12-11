@@ -1,32 +1,18 @@
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/lib/**",
-                "${workspaceFolder}/lib/minilibx-linux",
-                "${workspaceFolder}/lib/ft_printf"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-x64"
-        },
-        {
-            "name": "MacOS",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/lib/**",
-                "${workspaceFolder}/lib/minilibx_opengl"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c17",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "MacOS",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/lib/ft_printf",
+        "${workspaceFolder}/lib/minilibx_opengl"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c17",
+      "cppStandard": "c++14",
+      "intelliSenseMode": "linux-clang-x64"
+    }
+  ],
+  "version": 4
 }

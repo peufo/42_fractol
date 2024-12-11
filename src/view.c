@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 21:26:43 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 22:47:35 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ t_view	*view_create(t_image *img)
 	view->scale = SCALE;
 	view->origin.x = WINDOW_W / 2;
 	view->origin.y = WINDOW_H / 2;
+	img->view = view;
+	view_update(img);
+	return (view);
+}
+
+void	view_update(t_image *img)
+{
+	t_view	*view;
+
+	view = img->view;
 	view->to_image = img->pixels_per_line / view->scale;
 	view->to_view = view->scale / img->pixels_per_line;
 	view->top = view->to_view * view->origin.y;
 	view->left = view->to_view * -view->origin.x;
 	view->right = view->to_view * (WINDOW_W - view->origin.x);
 	view->bottom = view->to_view * -(WINDOW_H - view->origin.y);
-	printf("to_view %f\n", view->to_view);
-	printf("to_image %f\n", view->to_image);
-	printf("top %f\n", view->top);
-	printf("left %f\n", view->left);
-	printf("right %f\n", view->right);
-	printf("bottom %f\n", view->bottom);
-	return (view);
 }
 
 void	view_put_pixel(t_image *img, float x, float y, int color)
@@ -53,7 +56,6 @@ void	view_draw_line_v(t_image *img, float x, int color)
 	float	y;
 
 	y = img->view->bottom;
-	printf("y %f\n", y);
 	while (y < img->view->top)
 	{
 		view_put_pixel(img, x, y, color);

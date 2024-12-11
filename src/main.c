@@ -6,15 +6,15 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 21:38:45 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 22:52:31 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static t_m *save(t_m *m)
+static t_m	*save(t_m *m)
 {
-	static t_m *_m;
+	static t_m	*_m;
 
 	if (m)
 		_m = m;
@@ -44,23 +44,15 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
-	m.mlx = mlx_init();
-	m.win = mlx_new_window(m.mlx, WINDOW_W, WINDOW_H, "FRAAAAACTOL");
-	m.img = img_create(m.mlx, WINDOW_W, WINDOW_H);
 	save(&m);
-
-	img_draw_square(
-		m.img,
-		(t_dot){0, 0},
-		(t_dot){WINDOW_W, WINDOW_H},
-		0xFFFFFF);
-	view_draw_line_v(m.img, -1, 0x000000);
-	view_draw_line_v(m.img, 0, 0x000000);
-	view_draw_line_v(m.img, 1, 0x000000);
-	view_draw_line_h(m.img, -1, 0x000000);
-	view_draw_line_h(m.img, 0, 0x000000);
-	view_draw_line_h(m.img, 1, 0x000000);
-	mlx_put_image_to_window(m.mlx, m.win, m.img->data, 0, 0);
+	m.mlx = mlx_init();
+	if (!m.mlx)
+		return (terminate("MLX init failed"), 1);
+	m.win = mlx_new_window(m.mlx, WINDOW_W, WINDOW_H, "FRAAAAACTOL");
+	if (!m.win)
+		return (terminate("MLX new window failed"), 1);
+	m.img = img_create(m.mlx, WINDOW_W, WINDOW_H);
+	render(&m);
 	events_init(&m);
 	mlx_loop(m.mlx);
 	return (0);
