@@ -40,12 +40,11 @@ watch() {
 				warning "COMPILATION FAILED"
 			else
 				success "COMPILATION OK"
-				#valgrind --leak-check=full --track-origins=yes --log-file=leaks.log -s $PROG
-				$PROG &
+				valgrind --leak-check=full --track-origins=yes --log-file=leaks.log -s $PROG &
 				PROG_PID=$!
+				trap 'kill "$PROG_PID" & return' 2
 			fi
 
-			trap 'kill "$PROG_PID" && return' 2
 		fi
 		sleep 0.1
 	done
