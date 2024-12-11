@@ -5,6 +5,8 @@
     "mlx.h": "c",
     "ft_printf.h": "c",
     "limits.h": "c",
-    "mlx_int.h": "c"
+    "mlx_int.h": "c",
+    "stdio.h": "c",
+    "sstream": "c"
   }
 }

@@ -6,33 +6,36 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 20:13:00 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:04:59 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-void	view_init(t_image *img)
+t_view	*view_create(t_image *img)
 {
-	img->view = malloc(sizeof(*img->view));
-	if (!img->view)
-		return (terminate("Malloc failed"));
-	img->view->scale = SCALE;
-	img->view->origin.x = WINDOW_W / 2;
-	img->view->origin.y = WINDOW_H / 2;
-	img->view->to_image = img->pixels_per_line / img->view->scale;
-	img->view->to_view = img->view->scale / img->pixels_per_line;
-	img->view->top = img->view->to_view * img->view->origin.y;
-	img->view->left = img->view->to_view * -img->view->origin.x;
-	img->view->right = img->view->to_view * (WINDOW_W - img->view->origin.x);
-	img->view->bottom = img->view->to_view * -(WINDOW_H - img->view->origin.y);
-	printf("to_view %f\n", img->view->to_view);
-	printf("to_image %f\n", img->view->to_image);
-	printf("top %f\n", img->view->top);
-	printf("left %f\n", img->view->left);
-	printf("right %f\n", img->view->right);
-	printf("bottom %f\n", img->view->bottom);
+	t_view	*view;
+
+	view = malloc(sizeof(*view));
+	if (!view)
+		return (terminate("Malloc failed"), NULL);
+	view->scale = SCALE;
+	view->origin.x = WINDOW_W / 2;
+	view->origin.y = WINDOW_H / 2;
+	view->to_image = img->pixels_per_line / view->scale;
+	view->to_view = view->scale / img->pixels_per_line;
+	view->top = view->to_view * view->origin.y;
+	view->left = view->to_view * -view->origin.x;
+	view->right = view->to_view * (WINDOW_W - view->origin.x);
+	view->bottom = view->to_view * -(WINDOW_H - view->origin.y);
+	printf("to_view %f\n", view->to_view);
+	printf("to_image %f\n", view->to_image);
+	printf("top %f\n", view->top);
+	printf("left %f\n", view->left);
+	printf("right %f\n", view->right);
+	printf("bottom %f\n", view->bottom);
+	return (view);
 }
 
 void	view_put_pixel(t_image *img, float x, float y, int color)
@@ -61,12 +64,11 @@ void	view_draw_line_v(t_image *img, float x, int color)
 void	view_draw_line_h(t_image *img, float y, int color)
 {
 	float	x;
- 
+
 	x = img->view->left;
 	while (x < img->view->right)
 	{
 		view_put_pixel(img, x, y, color);
 		x += img->view->to_view;
 	}
-	
 }

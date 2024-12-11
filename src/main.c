@@ -6,22 +6,38 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 20:13:35 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:18:17 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+static t_m *save(t_m *m)
+{
+	static t_m *_m;
+
+	if (m)
+		_m = m;
+	return (_m);
+}
+
 void	terminate(char *error)
 {
-	t_image	*img;
+	t_m	*m;
 
-	img = img_get(NULL);
-	if (img && img->view)
+	m = save(NULL);
+	if (m && m->img && m->img->view)
 	{
-		free(img->view);
-		img->view = NULL;
+		free(m->img->view);
+		m->img->view = NULL;
 	}
+	if (m && m->img)
+	{
+		free(m->img);
+		m->img = NULL;
+	}
+	if (m)
+		mlx_destroy_window(m->mlx, m->win);
 	if (error)
 	{
 		ft_printf("Error: %s\n", error);
@@ -32,39 +48,28 @@ void	terminate(char *error)
 
 int	main(int ac, char **av)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_image	img;
+	t_m	m;
 
 	(void)ac;
 	(void)av;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WINDOW_W, WINDOW_H, "FRAAAAACTOL");
-	img_init(mlx, &img, WINDOW_W, WINDOW_H);
+	m.mlx = mlx_init();
+	m.win = mlx_new_window(m.mlx, WINDOW_W, WINDOW_H, "FRAAAAACTOL");
+	m.img = img_create(m.mlx, WINDOW_W, WINDOW_H);
+	save(&m);
+
 	img_draw_square(
-		&img,
+		m.img,
 		(t_dot){0, 0},
 		(t_dot){WINDOW_W, WINDOW_H},
 		0xFFFFFF);
-
-	view_draw_line_v(&img, -1, 0x000000);
-	view_draw_line_v(&img, 0, 0x000000);
-	view_draw_line_v(&img, 1, 0x000000);
-
-	view_draw_line_h(&img, -1, 0x000000);
-	view_draw_line_h(&img, 0, 0x000000);
-	view_draw_line_h(&img, 1, 0x000000);
-	//img_draw_square(&img, (t_dot){50, 50}, (t_dot){500, 500}, 0xFFF000);
-	/*
-	view_put_pixel(&img, -1, -1, 0x000000);
-	view_put_pixel(&img, 0, -1, 0x000000);
-	view_put_pixel(&img, 1, -1, 0x000000);
-	view_put_pixel(&img, 1, 1, 0x000000);
-	view_put_pixel(&img, 0, 1, 0x000000);
-	view_put_pixel(&img, -1, 1, 0x000000);
-	view_put_pixel(&img, -1, 0, 0x000000);
-	*/
-	mlx_put_image_to_window(mlx, mlx_win, img.data, 0, 0);
-	mlx_loop(mlx);
+	view_draw_line_v(m.img, -1, 0x000000);
+	view_draw_line_v(m.img, 0, 0x000000);
+	view_draw_line_v(m.img, 1, 0x000000);
+	view_draw_line_h(m.img, -1, 0x000000);
+	view_draw_line_h(m.img, 0, 0x000000);
+	view_draw_line_h(m.img, 1, 0x000000);
+	mlx_put_image_to_window(m.mlx, m.win, m.img->data, 0, 0);
+	events_init(m.win);
+	mlx_loop(m.mlx);
 	return (0);
 }
