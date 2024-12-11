@@ -6,12 +6,21 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 21:18:33 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:26:38 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
+
+void	img_destroy(t_image *img)
+{
+	if (!img)
+		return ;
+	if (img->view)
+		free(img->view);
+	free(img);
+}
 
 t_image	*img_create(void *mlx_ptr, int width, int height)
 {

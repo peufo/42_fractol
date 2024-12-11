@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 21:18:17 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:38:45 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,8 @@ void	terminate(char *error)
 	t_m	*m;
 
 	m = save(NULL);
-	if (m && m->img && m->img->view)
-	{
-		free(m->img->view);
-		m->img->view = NULL;
-	}
 	if (m && m->img)
-	{
-		free(m->img);
-		m->img = NULL;
-	}
+		img_destroy(m->img);
 	if (m)
 		mlx_destroy_window(m->mlx, m->win);
 	if (error)
@@ -69,7 +61,7 @@ int	main(int ac, char **av)
 	view_draw_line_h(m.img, 0, 0x000000);
 	view_draw_line_h(m.img, 1, 0x000000);
 	mlx_put_image_to_window(m.mlx, m.win, m.img->data, 0, 0);
-	events_init(m.win);
+	events_init(&m);
 	mlx_loop(m.mlx);
 	return (0);
 }

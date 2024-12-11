@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 21:18:28 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:37:56 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ typedef struct s_m
 	void	*mlx;
 	void	*win;
 	t_image	*img;
+	t_dot	mouse;
 }	t_m;
 
 void	terminate(char *error);
-void	events_init(void *mlx_win);
+void	events_init(t_m *m);
 
 t_image	*img_create(void *mlx_ptr, int width, int height);
+void	img_destroy(t_image *img);
 void	img_put_pixel(t_image *img, int x, int y, int color);
 void	img_draw_square(t_image *img, t_dot position, t_dot size, int color);
 
