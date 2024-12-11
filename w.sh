@@ -30,7 +30,7 @@ watch() {
 				success "\nNORMINETTE OK\n"
 			else
 				warning "\nNORMINETTE ERROR"
-				echo "$NORM_ERROR\n"
+				echo -e "$NORM_ERROR\n\n\n"
 			fi
 
 			PROG="./fractol"

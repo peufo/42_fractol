@@ -6,13 +6,13 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 18:13:49 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 20:13:35 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	terminate(char *error)
+void	terminate(char *error)
 {
 	t_image	*img;
 
@@ -25,9 +25,9 @@ int	terminate(char *error)
 	if (error)
 	{
 		ft_printf("Error: %s\n", error);
-		return (1);
+		exit(1);
 	}
-	return (0);
+	exit(0);
 }
 
 int	main(int ac, char **av)
@@ -46,7 +46,24 @@ int	main(int ac, char **av)
 		(t_dot){0, 0},
 		(t_dot){WINDOW_W, WINDOW_H},
 		0xFFFFFF);
-	img_draw_square(&img, (t_dot){50, 50}, (t_dot){500, 500}, 0xFFF000);
+
+	view_draw_line_v(&img, -1, 0x000000);
+	view_draw_line_v(&img, 0, 0x000000);
+	view_draw_line_v(&img, 1, 0x000000);
+
+	view_draw_line_h(&img, -1, 0x000000);
+	view_draw_line_h(&img, 0, 0x000000);
+	view_draw_line_h(&img, 1, 0x000000);
+	//img_draw_square(&img, (t_dot){50, 50}, (t_dot){500, 500}, 0xFFF000);
+	/*
+	view_put_pixel(&img, -1, -1, 0x000000);
+	view_put_pixel(&img, 0, -1, 0x000000);
+	view_put_pixel(&img, 1, -1, 0x000000);
+	view_put_pixel(&img, 1, 1, 0x000000);
+	view_put_pixel(&img, 0, 1, 0x000000);
+	view_put_pixel(&img, -1, 1, 0x000000);
+	view_put_pixel(&img, -1, 0, 0x000000);
+	*/
 	mlx_put_image_to_window(mlx, mlx_win, img.data, 0, 0);
 	mlx_loop(mlx);
 	return (0);

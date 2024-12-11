@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 18:12:02 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:58:52 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,18 @@ t_image	*img_get(t_image *img)
 	return (_img);
 }
 
+#include <stdio.h>
 void	img_init(void *mlx_ptr, t_image *img, int width, int height)
 {
 	img->data = mlx_new_image(mlx_ptr, width, height);
 	img->addr = mlx_get_data_addr(
 			img->data,
 			&img->bits_per_pixel,
-			&img->line_length,
+			&img->bytes_per_line,
 			&img->endian);
 	img->bytes_per_pixel = img->bits_per_pixel / 8;
-	img->view = malloc(sizeof(*img->view));
-	if (!img->view)
-	{
-		terminate("Malloc failed");
-		return ;
-	}
-	img->view->scale = SCALE;
-	img->view->origin.x = WINDOW_W / 2;
-	img->view->origin.y = WINDOW_H / 2;
+	img->pixels_per_line = img->bytes_per_line / img->bytes_per_pixel;
+	view_init(img);
 	img_get(img);
 }
 
@@ -47,7 +41,7 @@ void	img_put_pixel(t_image *img, int x, int y, int color)
 	char	*dst;
 	long	offset;
 
-	offset = (y * img->line_length + x * img->bytes_per_pixel);
+	offset = (y * img->bytes_per_line + x * img->bytes_per_pixel);
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
 }
