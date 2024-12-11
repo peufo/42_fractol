@@ -1,3 +1,5 @@
 /fractol
 /leaks.log
 /build
+*.o
+*.a

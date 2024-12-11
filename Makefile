@@ -7,15 +7,23 @@ OBJECTS			=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SOURCES_NAME)))
 FLAGS			=	-Wall -Wextra -Werror
 
 FT_PRINTF		=	./lib/ft_printf
-LIBX			=	./lib/minilibx-linux
-LIBS_INCLUDE	=	-I$(FT_PRINTF) -I$(LIBX) -I/usr/include
-LIBS_LINK_DIR	=	-L$(FT_PRINTF) -L$(LIBX) -L/usr/lib  
-LIBS_LINK		=	-lftprintf -lmlx -lXext -lX11 -lm -lz
+ifeq ($(shell uname),Darwin)
+	LIBX			=	./lib/minilibx_opengl
+	LIBS_INCLUDE	=	-I$(FT_PRINTF) -I$(LIBX)
+	LIBS_LINK_DIR	=	-L$(FT_PRINTF) -L$(LIBX) 
+	LIBS_LINK		=	-lftprintf -lmlx -framework OpenGL -framework AppKit
+else
+	LIBX			=	./lib/minilibx-linux
+	LIBS_INCLUDE	=	-I$(FT_PRINTF) -I$(LIBX) -I/usr/include
+	LIBS_LINK_DIR	=	-L$(FT_PRINTF) -L$(LIBX) -L/usr/lib  
+	LIBS_LINK		=	-lftprintf -lmlx -lXext -lX11 -lm -lz
+endif
 
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@make -C $(FT_PRINTF)
+	@make -C $(LIBX)
 	@cc $(OBJECTS) $(FLAGS) $(LIBS_LINK_DIR) $(LIBS_LINK) -o $@
 
 $(DIR_BUILD)/%.o: $(DIR_SRC)/%.c | $(DIR_BUILD)
