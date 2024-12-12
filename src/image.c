@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 22:47:55 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/11 23:18:28 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_image	*img_create(void *mlx_ptr, int width, int height)
 			&img->endian);
 	img->bytes_per_pixel = img->bits_per_pixel / 8;
 	img->pixels_per_line = img->bytes_per_line / img->bytes_per_pixel;
+	img->bytes = img->bytes_per_line * height;
 	view_create(img);
 	return (img);
 }
@@ -47,6 +48,11 @@ void	img_put_pixel(t_image *img, int x, int y, int color)
 	long	offset;
 
 	offset = (y * img->bytes_per_line + x * img->bytes_per_pixel);
+	if (offset > img->bytes)
+	{
+		printf("bytes: %d offset: %ld x: %d, y:%d", img->bytes, offset, x, y);
+		return (terminate("Try to draw pixel outside memory"));
+	}
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
 }

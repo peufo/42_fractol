@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 22:52:13 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:52:47 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define WINDOW_W 800
 # define WINDOW_H 600
 # define SCALE 4.0
+# define ZOOM_SPEED 0.02
 
 enum
 {
@@ -47,13 +48,13 @@ typedef struct s_dot
 typedef struct s_view
 {
 	t_dot	origin;
-	float	scale;
-	float	to_image;
-	float	to_view;
-	float	top;
-	float	left;
-	float	right;
-	float	bottom;
+	double	scale;
+	double	to_image;
+	double	to_view;
+	double	top;
+	double	left;
+	double	right;
+	double	bottom;
 }	t_view;
 typedef struct s_image
 {
@@ -62,6 +63,7 @@ typedef struct s_image
 	int		bits_per_pixel;
 	int		bytes_per_pixel;
 	int		bytes_per_line;
+	int		bytes;
 	int		pixels_per_line;
 	int		endian;
 	t_view	*view;
@@ -71,6 +73,8 @@ typedef struct s_m
 	void	*mlx;
 	void	*win;
 	t_image	*img;
+	short	is_grab;
+	t_dot	grab;
 }	t_m;
 
 void	terminate(char *error);
@@ -84,9 +88,9 @@ void	img_draw_square(t_image *img, t_dot position, t_dot size, int color);
 
 t_view	*view_create(t_image *img);
 void	view_update(t_image *img);
-void	view_put_pixel(t_image *img, float x, float y, int color);
-void	view_draw_line_v(t_image *img, float x, int color);
-void	view_draw_line_h(t_image *img, float y, int color);
+void	view_put_pixel(t_image *img, double x, double y, int color);
+void	view_draw_line_v(t_image *img, double x, int color);
+void	view_draw_line_h(t_image *img, double y, int color);
 
 int		min(int a, int b);
 int		max(int a, int b);
