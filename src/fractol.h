@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/13 17:26:58 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:49:16 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_m
 void	terminate(char *error);
 void	events_init(t_m *m);
 void	render(t_m *m);
+void	zoom(t_m *m, int x, int y, double z);
 
 t_image	*img_create(void *mlx_ptr, int width, int height);
 void	img_destroy(t_image *img);

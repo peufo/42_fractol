@@ -6,23 +6,15 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/13 17:38:43 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:50:07 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-static int	handle_destroy(t_m *m)
+static int	handle_mouse_move(int x, int y, t_m *m)
 {
-	(void)m;
-	terminate(NULL);
-	return (0);
-}
-
-static int handle_mouse_move(int x, int y, t_m *m)
-{
-
 	if (!m->is_grab)
 		return (0);
 	m->img->view->origin.x = (x - m->grab.x);
@@ -36,7 +28,7 @@ static int	handle_keydown(int keycode, t_m *m)
 {
 	(void)m;
 	if (keycode == 53)
-		return (handle_destroy(NULL));
+		return (terminate(NULL), 0);
 	if (keycode == 15)
 	{
 		m->img->view->scale = SCALE;
@@ -48,24 +40,8 @@ static int	handle_keydown(int keycode, t_m *m)
 	return (0);
 }
 
-void	zoom(t_m *m, int x, int y, double z)
-{
-	double	new_scale;
-	double	factor;
-
-	new_scale = m->img->view->scale * z;
-	factor = m->img->view->scale / new_scale;
-	m->img->view->scale = new_scale;
-	m->img->view->origin.x -= (x - m->img->view->origin.x) * (factor - 1);
-	m->img->view->origin.y -= (y - m->img->view->origin.y) * (factor - 1);
-	view_update(m->img);
-	render(m);
-}
-
 static int	handle_mousdown(int button, int x, int y, t_m *m)
 {
-
-
 	if (button == BUTTON_LEFT)
 	{
 		m->is_grab = 1;
@@ -86,7 +62,7 @@ static int	handle_mousdown(int button, int x, int y, t_m *m)
 	return (0);
 }
 
-static int handle_mouseup(int button, int x, int y, t_m *m)
+static int	handle_mouseup(int button, int x, int y, t_m *m)
 {
 	(void)x;
 	(void)y;
@@ -102,5 +78,4 @@ void	events_init(t_m *m)
 	mlx_hook(m->win, ON_MOUSEUP, 0, handle_mouseup, m);
 	mlx_hook(m->win, ON_MOUSEMOVE, 0, handle_mouse_move, m);
 	mlx_hook(m->win, ON_KEYDOWN, 0, handle_keydown, m);
-	mlx_hook(m->win, ON_DESTROY, 0, handle_destroy, m);
 }

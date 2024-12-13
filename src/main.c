@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/11 22:52:31 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:47:56 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ void	terminate(char *error)
 	exit(0);
 }
 
+static int	handle_destroy(t_m *m)
+{
+	(void)m;
+	terminate(NULL);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_m	m;
@@ -54,6 +61,7 @@ int	main(int ac, char **av)
 	m.img = img_create(m.mlx, WINDOW_W, WINDOW_H);
 	render(&m);
 	events_init(&m);
+	mlx_hook(m.win, ON_DESTROY, 0, handle_destroy, &m);
 	mlx_loop(m.mlx);
 	return (0);
 }
