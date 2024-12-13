@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/12 22:52:47 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:26:58 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define WINDOW_W 800
 # define WINDOW_H 600
 # define SCALE 4.0
-# define ZOOM_SPEED 0.02
+# define ZOOM_SPEED 0.1
 
 enum
 {
