@@ -7,6 +7,7 @@
     "limits.h": "c",
     "mlx_int.h": "c",
     "stdio.h": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "complex": "c"
   }
 }

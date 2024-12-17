@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 12:36:08 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:51:28 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_complex
 typedef struct s_view
 {
 	t_dot	origin;
+	double	x[WINDOW_W];
+	double	y[WINDOW_H];
 	double	scale;
 	double	to_image;
 	double	to_view;
@@ -103,12 +105,14 @@ void		view_update(t_image *img);
 void		view_put_pixel(t_image *img, double x, double y, int color);
 void		view_draw_line_v(t_image *img, double x, int color);
 void		view_draw_line_h(t_image *img, double y, int color);
+void		view_draw(t_m *m, int (*draw)(t_complex));
 
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_multiply(t_complex a, t_complex b);
-int			complex_is_divergent(t_complex z);
+t_complex	complex_divergence(t_complex z);
 double		complex_magnitude(t_complex z);
 
 int			limit(int v, int limit);
+double		double_limit(double v, double limit);
 
 #endif
