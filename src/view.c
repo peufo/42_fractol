@@ -6,12 +6,11 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/12 02:02:31 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:36:19 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 t_view	*view_create(t_image *img)
 {

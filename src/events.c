@@ -6,12 +6,11 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/13 17:50:07 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:36:14 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 static int	handle_mouse_move(int x, int y, t_m *m)
 {
