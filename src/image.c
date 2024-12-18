@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 11:42:29 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 12:43:00 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ void	img_draw_square(t_image *img, t_dot position, t_dot size, int color)
 	int	end_x;
 	int	end_y;
 
-	end_x = limit(position.x + size.x, WINDOW_W);
-	end_y = limit(position.y + size.y, WINDOW_H);
+	end_x = limit_sup(position.x + size.x, WINDOW_W);
+	end_y = limit_sup(position.y + size.y, WINDOW_H);
 	x = position.x;
 	while (x < end_x)
 	{

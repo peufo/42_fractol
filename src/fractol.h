@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 17:51:28 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:32:37 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define SCALE 4.0
 # define ZOOM_SPEED 0.2
 # define MAX_ITERATION 100
+# define PREDRAW_RES 5
 
 enum
 {
@@ -112,7 +113,9 @@ t_complex	complex_multiply(t_complex a, t_complex b);
 t_complex	complex_divergence(t_complex z);
 double		complex_magnitude(t_complex z);
 
-int			limit(int v, int limit);
+int			limit_sup(int v, int limit);
+int			limit_inf(int v, int limit);
 double		double_limit(double v, double limit);
+int			ternaire(int expr, int if_true, int if_false);
 
 #endif

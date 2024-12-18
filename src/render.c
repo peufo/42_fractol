@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 17:32:03 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:33:30 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static int	get_color(t_complex z)
 	if (magnitude < 4)
 		return (COLOR_A);
 	return (COLOR_B);
+}
+
+int get_square(t_complex z)
+{
+	if (z.r < -1)
+		return (0);
+	if (z.r > 0)
+		return 0;
+	if (z.i > 1)
+		return 0;
+	if (z.i < 0)
+		return 0;
+	return 0xff0000; 
 }
 
 void	render(t_m *m)
