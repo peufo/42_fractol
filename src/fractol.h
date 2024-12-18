@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 13:32:37 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:45:20 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,7 @@ void		img_draw_square(t_image *img,
 
 t_view		*view_create(t_image *img);
 void		view_update(t_image *img);
-void		view_put_pixel(t_image *img, double x, double y, int color);
-void		view_draw_line_v(t_image *img, double x, int color);
-void		view_draw_line_h(t_image *img, double y, int color);
-void		view_draw(t_m *m, int (*draw)(t_complex));
+void		view_draw(t_image *img, int (*draw)(t_complex));
 
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_multiply(t_complex a, t_complex b);

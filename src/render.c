@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 18:33:30 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:45:47 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ static int	get_color(t_complex z)
 	return (COLOR_B);
 }
 
-int get_square(t_complex z)
-{
-	if (z.r < -1)
-		return (0);
-	if (z.r > 0)
-		return 0;
-	if (z.i > 1)
-		return 0;
-	if (z.i < 0)
-		return 0;
-	return 0xff0000; 
-}
-
 void	render(t_m *m)
 {
 	img_draw_square(
@@ -46,20 +33,6 @@ void	render(t_m *m)
 		(t_dot){0, 0},
 		(t_dot){WINDOW_W, WINDOW_H},
 		0xFFFFFF);
-
-	view_draw(m, get_color);
-
-	/*
-	view_draw_line_v(m->img, -2, 0x000000);
-	view_draw_line_v(m->img, -1, 0x000000);
-	view_draw_line_v(m->img, 0, 0x00FF00);
-	view_draw_line_v(m->img, 1, 0x000000);
-	view_draw_line_v(m->img, 2, 0x000000);
-	view_draw_line_h(m->img, -1.5, 0x000000);
-	view_draw_line_h(m->img, -1, 0x000000);
-	view_draw_line_h(m->img, 0, 0x00FF00);
-	view_draw_line_h(m->img, 1, 0x000000);
-	view_draw_line_h(m->img, 1.5, 0x000000);
-	*/
+	view_draw(m->img, get_color);
 	mlx_put_image_to_window(m->mlx, m->win, m->img->data, 0, 0);
 }

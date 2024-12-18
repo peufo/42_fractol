@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 12:43:00 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:35:59 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_image	*img_create(void *mlx_ptr, int width, int height)
 			&img->bytes_per_line,
 			&img->endian);
 	if (!img->addr)
-		return (terminate("Image creation failed"), NULL);	
+		return (terminate("Image creation failed"), NULL);
 	img->bytes_per_pixel = img->bits_per_pixel / 8;
 	img->pixels_per_line = img->bytes_per_line / img->bytes_per_pixel;
 	img->bytes = img->bytes_per_line * height;
