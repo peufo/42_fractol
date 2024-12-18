@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 13:35:59 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:05:56 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	img_put_pixel(t_image *img, int x, int y, int color)
 	offset = (y * img->bytes_per_line + x * img->bytes_per_pixel);
 	if (offset > img->bytes)
 	{
-		printf("bytes: %d offset: %ld x: %d, y:%d", img->bytes, offset, x, y);
+		ft_printf("bytes: %d offset: %d x: %d, y:%d", img->bytes, offset, x, y);
 		return (terminate("Try to draw pixel outside memory"));
 	}
 	dst = img->addr + offset;

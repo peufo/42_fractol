@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/13 18:36:14 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:44:11 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,15 @@ static int	handle_mouse_move(int x, int y, t_m *m)
 
 static int	handle_keydown(int keycode, t_m *m)
 {
-	(void)m;
 	if (keycode == 53)
 		return (terminate(NULL), 0);
+	if (keycode == 8)
+		return (set_colors(m), render(m), 0);
+	if (keycode == 49)
+	{
+		m->is_predraw = !m->is_predraw;
+		render(m);
+	}
 	if (keycode == 15)
 	{
 		m->img->view->scale = SCALE;
@@ -36,6 +42,14 @@ static int	handle_keydown(int keycode, t_m *m)
 		view_update(m->img);
 		render(m);
 	}
+	if (keycode == 123)
+		move(m, -(WINDOW_W / 20), 0);
+	if (keycode == 124)
+		move(m, WINDOW_W / 20, 0);
+	if (keycode == 125)
+		move(m, 0, -(WINDOW_H / 20));
+	if (keycode == 126)
+		move(m, 0, WINDOW_H / 20);
 	return (0);
 }
 

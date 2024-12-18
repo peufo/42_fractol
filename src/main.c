@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 19:26:21 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:34:15 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(int ac, char **av)
 	if (!m.win)
 		return (terminate("MLX new window failed"), 1);
 	m.img = img_create(m.mlx, WINDOW_W, WINDOW_H);
+	set_colors(&m);
 	render(&m);
 	events_init(&m);
 	mlx_hook(m.win, ON_DESTROY, 0, handle_destroy, &m);

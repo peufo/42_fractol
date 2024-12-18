@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:27:45 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/17 16:33:30 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:00:09 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,18 @@ double	complex_magnitude(t_complex z)
 	return (z.r * z.r + z.i * z.i);
 }
 
-t_complex	iteration_julia(t_complex z)
+t_bound	complex_bounded(t_complex z, t_complex c)
 {
-	t_complex	res;
+	t_bound	res;
 
-	res = complex_multiply(z, z);
-	res.r -= 0.75;
-	return (res);
-}
-
-t_complex	complex_divergence(t_complex z)
-{
-	int			i;
-
-	i = 0;
-	while (i < MAX_ITERATION && complex_magnitude(z) < 4)
+	res.i = 0;
+	res.magnitude = 0;
+	res.z = z;
+	while (res.i < 25 && res.magnitude < 4)
 	{
-		z = iteration_julia(z);
-		i++;
+		res.z = complex_add(complex_multiply(res.z, res.z), c);
+		res.magnitude = complex_magnitude(res.z);
+		res.i++;
 	}
-	return (z);
+	return (res);
 }
