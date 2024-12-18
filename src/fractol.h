@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 22:30:05 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:51:36 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,13 @@ void		view_draw(t_m *m, int (*draw)(t_m*, t_complex));
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_multiply(t_complex a, t_complex b);
 double		complex_magnitude(t_complex z);
-t_bound		complex_bounded(t_complex z, t_complex c);
+t_bound		complex_bounded(t_m *m, t_complex z, t_complex c);
 
 int			limit_sup(int v, int limit);
 int			limit_inf(int v, int limit);
 double		double_limit(double v, double limit);
 int			ternaire(int expr, int if_true, int if_false);
 void		set_colors(t_m *m);
+int			get_gradient(t_m *m, double magnitude);
 
 #endif

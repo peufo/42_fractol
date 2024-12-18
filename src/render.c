@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 21:54:08 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:52:12 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,8 @@ static int	get_color(t_m *m, t_complex z)
 {
 	t_bound	bound;
 
-	bound = complex_bounded(z, z);
-	if (bound.magnitude < 4)
-		return (m->colors.a);
-	if (bound.magnitude < 6)
-		return (m->colors.b);
-	if (bound.magnitude < 8)
-		return (m->colors.c);
-	if (bound.magnitude < 10)
-		return (m->colors.d);
-	return (m->colors.e);
+	bound = complex_bounded(m, z, z);
+	return (get_gradient(m, bound.magnitude));
 }
 
 void	render(t_m *m)
