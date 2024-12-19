@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 22:42:42 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 00:17:47 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))
 			z.r = m->img->view->x[v.x];
 			z.i = m->img->view->y[v.y];
 			color = draw(m, z);
-			img_draw_square(m->img, (t_dot){r.x * PREDRAW_RES, r.y * PREDRAW_RES}, (t_dot){PREDRAW_RES, PREDRAW_RES}, color);
+			img_draw_square(m->img,
+				(t_dot){r.x * PREDRAW_RES, r.y * PREDRAW_RES},
+				(t_dot){PREDRAW_RES, PREDRAW_RES},
+				color);
 			r.y++;
 		}
 		r.x++;
@@ -80,13 +83,13 @@ static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))
 
 void	view_draw(t_m *m, int (*draw)(t_m*, t_complex))
 {
-	int	x;
-	int	y;
-	int	color;
-	t_view *view;
+	int		x;
+	int		y;
+	int		color;
+	t_view	*view;
 
 	view = m->img->view;
-	if (m->is_predraw)
+	if (m->is_mode_predraw)
 		return (view_predraw(m, draw));
 	x = 0;
 	while (x < WINDOW_W)

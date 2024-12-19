@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 18:27:45 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 23:23:38 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 00:15:48 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ double	complex_magnitude(t_complex z)
 t_bound	complex_bounded(t_m *m, t_complex z, t_complex c)
 {
 	t_bound	res;
-	(void)m;
 
+	(void)m;
 	res.i = 0;
 	res.magnitude = 0;
 	res.z = z;

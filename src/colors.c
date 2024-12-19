@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:58:06 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/19 00:02:56 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 00:18:28 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	set_colors(t_m *m)
 {
 	static int	palette_index;
+
 	if (palette_index == 4)
 		palette_index = 0;
 	m->colors = (t_colors[]){
@@ -25,7 +26,7 @@ void	set_colors(t_m *m)
 	}[palette_index++];
 }
 
-static int gradient(int a, int b, float ratio)
+static int	gradient(int a, int b, float ratio)
 {
 	a = a % 256;
 	b = b % 256;
@@ -36,7 +37,7 @@ static int gradient(int a, int b, float ratio)
 
 static int	compute_gradient(int color_a, int color_b, float ratio)
 {
-	int color;
+	int	color;
 
 	color = 0;
 	color += gradient(color_a >> 16, color_b >> 16, ratio) << 16;
@@ -45,15 +46,18 @@ static int	compute_gradient(int color_a, int color_b, float ratio)
 	return (color);
 }
 
-int	get_gradient(t_m *m, double magnitude)
+int	get_gradient(t_m *m, t_bound b)
 {
-	if (magnitude < 4)
+	double	magni;
+
+	magni = b.magnitude;
+	if (magni < 4)
 		return (m->colors.a);
-	if (magnitude < 8)
-		return (compute_gradient(m->colors.b, m->colors.c, (magnitude - 4) / 4));
-	if (magnitude < 12)
-		return (compute_gradient(m->colors.c, m->colors.d, (magnitude - 8) / 4));
-	if (magnitude < 16)
-		return (compute_gradient(m->colors.d, m->colors.e, (magnitude - 12) / 4));
+	if (magni < 8)
+		return (compute_gradient(m->colors.b, m->colors.c, (magni - 4) / 4));
+	if (magni < 12)
+		return (compute_gradient(m->colors.c, m->colors.d, (magni - 8) / 4));
+	if (magni < 16)
+		return (compute_gradient(m->colors.d, m->colors.e, (magni - 12) / 4));
 	return (m->colors.e);
 }
