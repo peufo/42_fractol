@@ -6,14 +6,11 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 23:52:12 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:50:56 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-#define COLOR_A 0xD4781A
-#define COLOR_B 0xAA3678
 
 static int	get_color(t_m *m, t_complex z)
 {
