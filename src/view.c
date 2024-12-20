@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:50:14 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:53:30 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,19 @@ void	view_update(t_m *m)
 	int		i;
 
 	view = &m->view;
-	view->to_image = m->img->pixels_per_line / view->scale;
-	view->to_view = view->scale / m->img->pixels_per_line;
+	view->pixel_to_view = view->scale / m->img->pixels_per_line;
 	i = 0;
 	while (i < WINDOW_W)
 	{
-		view->x[i] = (i - view->origin.x) * view->to_view;
+		view->x[i] = (i - view->origin.x) * view->pixel_to_view;
 		i++;
 	}
 	i = 0;
 	while (i < WINDOW_H)
 	{
-		view->y[i] = -(i - view->origin.y) * view->to_view;
+		view->y[i] = -(i - view->origin.y) * view->pixel_to_view;
 		i++;
 	}
-	view->top = view->to_view * view->origin.y;
-	view->left = view->to_view * -view->origin.x;
-	view->right = view->to_view * (WINDOW_W - view->origin.x - 1);
-	view->bottom = view->to_view * -(WINDOW_H - view->origin.y - 1);
 }
 
 static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))

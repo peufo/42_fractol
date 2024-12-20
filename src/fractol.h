@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:45:23 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:53:30 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,7 @@ typedef struct s_view
 	double		x[WINDOW_W];
 	double		y[WINDOW_H];
 	double		scale;
-	double		to_image;
-	double		to_view;
-	double		top;
-	double		left;
-	double		right;
-	double		bottom;
+	double		pixel_to_view;
 }	t_view;
 typedef struct s_image
 {
