@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 12:45:59 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:01:12 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av)
 	events_mouse_init(&m);
 	events_key_init(&m);
 	set_colors(&m);
-	fractal_set(&m, 1);
+	fractal_set(&m, 0);
 	view_init(&m);
 	mlx_hook(m.win, ON_DESTROY, 0, handle_destroy, &m);
 	mlx_loop(m.mlx);

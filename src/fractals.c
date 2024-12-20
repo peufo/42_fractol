@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:04:45 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 12:44:57 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:00:54 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	julia(t_m *m, t_complex z)
 {
 	t_bound	bound;
 
-	bound = complex_bounded(m, z, (t_complex){-0.75, 0});
+	bound = complex_bounded(m, z, m->c);
 	return (get_gradient(m, bound));
 }
 
@@ -34,6 +34,8 @@ void	fractal_set(t_m *m, int fractal_index)
 		return (terminate(m, "fractal index invalid"));
 	if (fractal_index == 0)
 	{
+		m->c.r = -0.75;
+		m->c.i = 0;
 		m->fractal.get_color = julia;
 		m->fractal.scale = 4;
 		m->fractal.origin.x = WINDOW_W / 2;

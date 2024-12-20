@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 12:42:51 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 13:01:49 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,11 @@ struct s_m
 	t_dot_long	grab;
 	t_colors	colors;
 	t_fractal	fractal;
+	t_keys		is_key;
+	t_complex	c;
 	short		is_mouse_grab;
 	short		is_mode_predraw;
 	short		is_colored_by_i;
-	t_keys		is_key;
 };
 
 void		terminate(t_m *m, char *error);
