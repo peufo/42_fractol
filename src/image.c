@@ -6,43 +6,33 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:27:43 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:40:57 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	img_destroy(t_m *m)
-{
-	if (!m && !m->img)
-		return ;
-	if (m->img->view)
-		free(m->img->view);
-	free(m->img);
-}
-
-void	img_init(t_m *m, int width, int height)
+void	img_init(t_m *m)
 {
 	t_image	*img;
 
 	img = malloc(sizeof(*img));
 	if (!img)
 		return (terminate(m, "Malloc failed"));
-	img->data = mlx_new_image(m->mlx, width, height);
+	img->data = mlx_new_image(m->mlx, WINDOW_W, WINDOW_H);
 	if (!img->data)
-		return (terminate(m, "Image creation failed"));
+		return (terminate(m, "MLX new image failed"));
 	img->addr = mlx_get_data_addr(
 			img->data,
 			&img->bits_per_pixel,
 			&img->bytes_per_line,
 			&img->endian);
 	if (!img->addr)
-		return (terminate(m, "Image creation failed"));
+		return (terminate(m, "MLX image get adress failed"));
 	img->bytes_per_pixel = img->bits_per_pixel / 8;
 	img->pixels_per_line = img->bytes_per_line / img->bytes_per_pixel;
-	img->bytes = img->bytes_per_line * height;
+	img->bytes = img->bytes_per_line * WINDOW_H;
 	m->img = img;
-	view_init(m);
 }
 
 void	img_put_pixel(t_m *m, int x, int y, int color)

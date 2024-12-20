@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:23:29 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:31:55 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	handle_mouse_move(int x, int y, t_m *m)
 {
 	if (!m->is_mouse_grab)
 		return (0);
-	m->img->view->origin.x = (x - m->grab.x);
-	m->img->view->origin.y = (y - m->grab.y);
+	m->view->origin.x = (x - m->grab.x);
+	m->view->origin.y = (y - m->grab.y);
 	view_update(m);
 	render(m);
 	return (0);
@@ -28,8 +28,8 @@ static int	handle_mousdown(int button, int x, int y, t_m *m)
 	if (button == BUTTON_LEFT)
 	{
 		m->is_mouse_grab = 1;
-		m->grab.x = x - m->img->view->origin.x;
-		m->grab.y = y - m->img->view->origin.y;
+		m->grab.x = x - m->view->origin.x;
+		m->grab.y = y - m->view->origin.y;
 		return (0);
 	}
 	if (button == BUTTON_SCROLL_UP)

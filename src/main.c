@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:26:51 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:41:20 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	terminate(t_m *m, char *error)
 {
-	img_destroy(m);
 	if (m)
+	{
+		if (m->view)
+			free(m->view);
+		if (m->img)
+		{
+			mlx_destroy_image(m->mlx, m->img->data);
+			free(m->img);
+		}
 		mlx_destroy_window(m->mlx, m->win);
+	}
 	if (error)
 	{
 		ft_printf("Error: %s\n", error);
@@ -43,7 +51,8 @@ int	main(int ac, char **av)
 	m.win = mlx_new_window(m.mlx, WINDOW_W, WINDOW_H, "FRAAAAACTOL");
 	if (!m.win)
 		return (terminate(&m, "MLX new window failed"), 1);
-	img_init(&m, WINDOW_W, WINDOW_H);
+	img_init(&m);
+	view_init(&m);
 	set_colors(&m);
 	events_mouse_init(&m);
 	events_key_init(&m);

@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:23:24 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:31:43 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	reset_view(t_m *m)
 {
-	m->img->view->scale = SCALE;
-	m->img->view->origin.x = WINDOW_W / 2;
-	m->img->view->origin.y = WINDOW_H / 2;
+	m->view->scale = SCALE;
+	m->view->origin.x = WINDOW_W / 2;
+	m->view->origin.y = WINDOW_H / 2;
 	view_update(m);
 	render(m);
 }

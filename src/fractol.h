@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:25:52 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:41:13 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ typedef struct s_image
 	int		bytes;
 	int		pixels_per_line;
 	int		endian;
-	t_view	*view;
 }	t_image;
 typedef struct s_colors
 {
@@ -111,6 +110,7 @@ typedef struct s_m
 	void		*mlx;
 	void		*win;
 	t_image		*img;
+	t_view		*view;
 	t_dot_long	grab;
 	t_colors	colors;
 	short		is_mouse_grab;
@@ -126,8 +126,7 @@ void		render(t_m *m);
 void		zoom(t_m *m, int x, int y, double z);
 void		move(t_m *m, int x, int y);
 
-void		img_init(t_m *m, int width, int height);
-void		img_destroy(t_m *m);
+void		img_init(t_m *m);
 void		img_put_pixel(t_m *m, int x, int y, int color);
 void		img_draw_square(t_m *m, t_dot position, t_dot size, int color);
 
