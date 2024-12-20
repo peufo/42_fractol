@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 12:53:20 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:57:35 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	handle_move(short is_keydown, int keycode, t_m *m)
 
 static int	handle_keydown(int keycode, t_m *m)
 {
-	printf("prout %d\n", keycode);
 	if (keycode == 53)
 		return (terminate(m, NULL), 0);
 	if (keycode == 18)
