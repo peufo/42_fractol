@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:41:13 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:45:23 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_m
 	void		*mlx;
 	void		*win;
 	t_image		*img;
-	t_view		*view;
+	t_view		view;
 	t_dot_long	grab;
 	t_colors	colors;
 	short		is_mouse_grab;

@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:41:20 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:48:40 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	terminate(t_m *m, char *error)
 {
 	if (m)
 	{
-		if (m->view)
-			free(m->view);
 		if (m->img)
 		{
 			mlx_destroy_image(m->mlx, m->img->data);

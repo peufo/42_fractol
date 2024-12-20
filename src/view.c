@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:31:26 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:50:14 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,9 @@
 
 void	view_init(t_m *m)
 {
-	t_view	*view;
-
-	view = malloc(sizeof(*view));
-	if (!view)
-		return (terminate(m, "Malloc failed"));
-	view->scale = SCALE;
-	view->origin.x = WINDOW_W / 2;
-	view->origin.y = WINDOW_H / 2;
-	m->view = view;
+	m->view.scale = SCALE;
+	m->view.origin.x = WINDOW_W / 2;
+	m->view.origin.y = WINDOW_H / 2;
 	view_update(m);
 }
 
@@ -31,7 +25,7 @@ void	view_update(t_m *m)
 	t_view	*view;
 	int		i;
 
-	view = m->view;
+	view = &m->view;
 	view->to_image = m->img->pixels_per_line / view->scale;
 	view->to_view = view->scale / m->img->pixels_per_line;
 	i = 0;
@@ -67,8 +61,8 @@ static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))
 		{
 			v.x = r.x * PREDRAW_RES + PREDRAW_RES / 2;
 			v.y = r.y * PREDRAW_RES + PREDRAW_RES / 2;
-			z.r = m->view->x[v.x];
-			z.i = m->view->y[v.y];
+			z.r = m->view.x[v.x];
+			z.i = m->view.y[v.y];
 			color = draw(m, z);
 			img_draw_square(m,
 				(t_dot){r.x * PREDRAW_RES, r.y * PREDRAW_RES},
@@ -87,7 +81,7 @@ void	view_draw(t_m *m, int (*draw)(t_m*, t_complex))
 	int		color;
 	t_view	*view;
 
-	view = m->view;
+	view = &m->view;
 	if (m->is_mode_predraw)
 		return (view_predraw(m, draw));
 	x = 0;
