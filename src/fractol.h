@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:54:06 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:42:51 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "ft_printf.h"
 # define WINDOW_W 800
 # define WINDOW_H 600
-# define SCALE 4.0
 # define ZOOM_SPEED 0.2
 # define MAX_ITERATION 256
 # define PREDRAW_RES 5
@@ -100,7 +99,14 @@ typedef struct s_keys
 	short	up;
 	short	down;
 }	t_keys;
-typedef struct s_m
+typedef struct s_m	t_m;
+typedef struct s_fractal
+{
+	double		scale;
+	t_dot_long	origin;
+	int			(*get_color)(t_m *m, t_complex z);
+}	t_fractal;
+struct s_m
 {
 	void		*mlx;
 	void		*win;
@@ -108,11 +114,12 @@ typedef struct s_m
 	t_view		view;
 	t_dot_long	grab;
 	t_colors	colors;
+	t_fractal	fractal;
 	short		is_mouse_grab;
 	short		is_mode_predraw;
 	short		is_colored_by_i;
 	t_keys		is_key;
-}	t_m;
+};
 
 void		terminate(t_m *m, char *error);
 void		events_mouse_init(t_m *m);
@@ -120,6 +127,7 @@ void		events_key_init(t_m *m);
 void		render(t_m *m);
 void		zoom(t_m *m, int x, int y, double z);
 void		move(t_m *m, int x, int y);
+void		fractal_set(t_m *m, int fractal_index);
 
 void		img_init(t_m *m);
 void		img_put_pixel(t_m *m, int x, int y, int color);
@@ -137,7 +145,6 @@ t_bound		complex_bounded(t_m *m, t_complex z, t_complex c);
 int			limit_sup(int v, int limit);
 int			limit_inf(int v, int limit);
 double		double_limit(double v, double limit);
-int			ternaire(int expr, int if_true, int if_false);
 void		set_colors(t_m *m);
 int			get_gradient(t_m *m, t_bound bound);
 

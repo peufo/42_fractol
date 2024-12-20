@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:57:36 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:48:09 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	view_init(t_m *m)
 {
-	m->view.scale = SCALE;
-	m->view.origin.x = WINDOW_W / 2;
-	m->view.origin.y = WINDOW_H / 2;
+	m->view.scale = m->fractal.scale;
+	m->view.origin = m->fractal.origin;
 	view_update(m);
+	render(m);
 }
 
 void	view_update(t_m *m)
@@ -41,7 +41,7 @@ void	view_update(t_m *m)
 	}
 }
 
-static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))
+static void	view_predraw(t_m *m, int (*get_color)(t_m*, t_complex))
 {
 	t_dot		r;
 	t_dot		v;
@@ -58,7 +58,7 @@ static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))
 			v.y = r.y * PREDRAW_RES + PREDRAW_RES / 2;
 			z.r = m->view.x[v.x];
 			z.i = m->view.y[v.y];
-			color = draw(m, z);
+			color = get_color(m, z);
 			img_draw_square(m,
 				(t_dot){r.x * PREDRAW_RES, r.y * PREDRAW_RES},
 				(t_dot){PREDRAW_RES, PREDRAW_RES},
@@ -69,7 +69,7 @@ static void	view_predraw(t_m *m, int (*draw)(t_m*, t_complex))
 	}
 }
 
-void	view_draw(t_m *m, int (*draw)(t_m*, t_complex))
+void	view_draw(t_m *m, int (*get_color)(t_m*, t_complex))
 {
 	int		x;
 	int		y;
@@ -78,14 +78,14 @@ void	view_draw(t_m *m, int (*draw)(t_m*, t_complex))
 
 	view = &m->view;
 	if (m->is_mode_predraw)
-		return (view_predraw(m, draw));
+		return (view_predraw(m, get_color));
 	x = 0;
 	while (x < WINDOW_W)
 	{
 		y = 0;
 		while (y < WINDOW_H)
 		{
-			color = draw(m, (t_complex){view->x[x], view->y[y]});
+			color = get_color(m, (t_complex){view->x[x], view->y[y]});
 			img_put_pixel(m, x, y, color);
 			y++;
 		}

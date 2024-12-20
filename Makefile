@@ -1,7 +1,7 @@
 NAME			=	fractol
 DIR_SRC			=	./src
 DIR_BUILD		=	./build
-SOURCES			=	colors.c complex.c events_key.c events_mouse.c image.c main.c math.c render.c view.c zoom.c 
+SOURCES			=	colors.c complex.c events_key.c events_mouse.c fractals.c image.c main.c math.c render.c view.c zoom.c 
 SOURCES_NAME	=	$(basename $(SOURCES))
 OBJECTS			=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SOURCES_NAME)))
 FLAGS			=	-Wall -Wextra -Werror

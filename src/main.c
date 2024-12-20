@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:55:18 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:45:59 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	main(int ac, char **av)
 	if (!m.win)
 		return (terminate(&m, "MLX new window failed"), 1);
 	img_init(&m);
-	view_init(&m);
-	set_colors(&m);
 	events_mouse_init(&m);
 	events_key_init(&m);
-	render(&m);
+	set_colors(&m);
+	fractal_set(&m, 1);
+	view_init(&m);
 	mlx_hook(m.win, ON_DESTROY, 0, handle_destroy, &m);
 	mlx_loop(m.mlx);
 	return (0);

@@ -6,20 +6,11 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:48:08 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:53:20 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void	reset_view(t_m *m)
-{
-	m->view.scale = SCALE;
-	m->view.origin.x = WINDOW_W / 2;
-	m->view.origin.y = WINDOW_H / 2;
-	view_update(m);
-	render(m);
-}
 
 static void	handle_move(short is_keydown, int keycode, t_m *m)
 {
@@ -47,8 +38,13 @@ static void	handle_move(short is_keydown, int keycode, t_m *m)
 
 static int	handle_keydown(int keycode, t_m *m)
 {
+	printf("prout %d\n", keycode);
 	if (keycode == 53)
 		return (terminate(m, NULL), 0);
+	if (keycode == 18)
+		return (fractal_set(m, 0), view_init(m), 0);
+	if (keycode == 19)
+		return (fractal_set(m, 1), view_init(m), 0);
 	if (keycode == 8)
 		return (set_colors(m), render(m), 0);
 	if (keycode == 49)
@@ -60,7 +56,7 @@ static int	handle_keydown(int keycode, t_m *m)
 	if (keycode == 1)
 		return (zoom(m, WINDOW_W / 2, WINDOW_H / 2, 1 + ZOOM_SPEED), 0);
 	if (keycode == 15)
-		return (reset_view(m), 0);
+		return (view_init(m), 0);
 	if (123 <= keycode && keycode <= 126)
 		return (handle_move(1, keycode, m), 0);
 	if (keycode == 260 || keycode == 256)
