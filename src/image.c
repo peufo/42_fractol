@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:40:57 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:57:01 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,19 @@
 
 void	img_init(t_m *m)
 {
-	t_image	*img;
-
-	img = malloc(sizeof(*img));
-	if (!img)
-		return (terminate(m, "Malloc failed"));
-	img->data = mlx_new_image(m->mlx, WINDOW_W, WINDOW_H);
-	if (!img->data)
+	m->img.data = mlx_new_image(m->mlx, WINDOW_W, WINDOW_H);
+	if (!m->img.data)
 		return (terminate(m, "MLX new image failed"));
-	img->addr = mlx_get_data_addr(
-			img->data,
-			&img->bits_per_pixel,
-			&img->bytes_per_line,
-			&img->endian);
-	if (!img->addr)
+	m->img.addr = mlx_get_data_addr(
+			m->img.data,
+			&m->img.bits_per_pixel,
+			&m->img.bytes_per_line,
+			&m->img.endian);
+	if (!m->img.addr)
 		return (terminate(m, "MLX image get adress failed"));
-	img->bytes_per_pixel = img->bits_per_pixel / 8;
-	img->pixels_per_line = img->bytes_per_line / img->bytes_per_pixel;
-	img->bytes = img->bytes_per_line * WINDOW_H;
-	m->img = img;
+	m->img.bytes_per_pixel = m->img.bits_per_pixel / 8;
+	m->img.pixels_per_line = m->img.bytes_per_line / m->img.bytes_per_pixel;
+	m->img.bytes = m->img.bytes_per_line * WINDOW_H;
 }
 
 void	img_put_pixel(t_m *m, int x, int y, int color)
@@ -41,7 +35,7 @@ void	img_put_pixel(t_m *m, int x, int y, int color)
 	long	offset;
 	t_image	*img;
 
-	img = m->img;
+	img = &m->img;
 	offset = (y * img->bytes_per_line + x * img->bytes_per_pixel);
 	if (offset > img->bytes)
 	{

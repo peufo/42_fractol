@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:23:34 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:57:24 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	render(t_m *m)
 		(t_dot){WINDOW_W, WINDOW_H},
 		0xFFFFFF);
 	view_draw(m, get_color);
-	mlx_put_image_to_window(m->mlx, m->win, m->img->data, 0, 0);
+	mlx_put_image_to_window(m->mlx, m->win, m->img.data, 0, 0);
 }
