@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 00:22:37 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:25:52 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,27 +115,24 @@ typedef struct s_m
 	t_colors	colors;
 	short		is_mouse_grab;
 	short		is_mode_predraw;
-	short		is_mode_iteration;
+	short		is_colored_by_i;
 	t_keys		is_key;
 }	t_m;
 
-void		terminate(char *error);
+void		terminate(t_m *m, char *error);
 void		events_mouse_init(t_m *m);
 void		events_key_init(t_m *m);
 void		render(t_m *m);
 void		zoom(t_m *m, int x, int y, double z);
 void		move(t_m *m, int x, int y);
 
-t_image		*img_create(void *mlx_ptr, int width, int height);
-void		img_destroy(t_image *img);
-void		img_put_pixel(t_image *img, int x, int y, int color);
-void		img_draw_square(t_image *img,
-				t_dot position,
-				t_dot size,
-				int color);
+void		img_init(t_m *m, int width, int height);
+void		img_destroy(t_m *m);
+void		img_put_pixel(t_m *m, int x, int y, int color);
+void		img_draw_square(t_m *m, t_dot position, t_dot size, int color);
 
-t_view		*view_create(t_image *img);
-void		view_update(t_image *img);
+void		view_init(t_m *m);
+void		view_update(t_m *m);
 void		view_draw(t_m *m, int (*draw)(t_m*, t_complex));
 
 t_complex	complex_add(t_complex a, t_complex b);

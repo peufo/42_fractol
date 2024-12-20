@@ -6,61 +6,63 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/18 14:05:56 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:27:43 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	img_destroy(t_image *img)
+void	img_destroy(t_m *m)
 {
-	if (!img)
+	if (!m && !m->img)
 		return ;
-	if (img->view)
-		free(img->view);
-	free(img);
+	if (m->img->view)
+		free(m->img->view);
+	free(m->img);
 }
 
-t_image	*img_create(void *mlx_ptr, int width, int height)
+void	img_init(t_m *m, int width, int height)
 {
 	t_image	*img;
 
 	img = malloc(sizeof(*img));
 	if (!img)
-		return (terminate("Malloc failed"), NULL);
-	img->data = mlx_new_image(mlx_ptr, width, height);
+		return (terminate(m, "Malloc failed"));
+	img->data = mlx_new_image(m->mlx, width, height);
 	if (!img->data)
-		return (terminate("Image creation failed"), NULL);
+		return (terminate(m, "Image creation failed"));
 	img->addr = mlx_get_data_addr(
 			img->data,
 			&img->bits_per_pixel,
 			&img->bytes_per_line,
 			&img->endian);
 	if (!img->addr)
-		return (terminate("Image creation failed"), NULL);
+		return (terminate(m, "Image creation failed"));
 	img->bytes_per_pixel = img->bits_per_pixel / 8;
 	img->pixels_per_line = img->bytes_per_line / img->bytes_per_pixel;
 	img->bytes = img->bytes_per_line * height;
-	view_create(img);
-	return (img);
+	m->img = img;
+	view_init(m);
 }
 
-void	img_put_pixel(t_image *img, int x, int y, int color)
+void	img_put_pixel(t_m *m, int x, int y, int color)
 {
 	char	*dst;
 	long	offset;
+	t_image	*img;
 
+	img = m->img;
 	offset = (y * img->bytes_per_line + x * img->bytes_per_pixel);
 	if (offset > img->bytes)
 	{
 		ft_printf("bytes: %d offset: %d x: %d, y:%d", img->bytes, offset, x, y);
-		return (terminate("Try to draw pixel outside memory"));
+		return (terminate(m, "Try to draw pixel outside memory"));
 	}
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
 }
 
-void	img_draw_square(t_image *img, t_dot position, t_dot size, int color)
+void	img_draw_square(t_m *m, t_dot position, t_dot size, int color)
 {
 	int	x;
 	int	y;
@@ -74,7 +76,7 @@ void	img_draw_square(t_image *img, t_dot position, t_dot size, int color)
 	{
 		y = position.y;
 		while (y < end_y)
-			img_put_pixel(img, x, y++, color);
+			img_put_pixel(m, x, y++, color);
 		x++;
 	}
 }

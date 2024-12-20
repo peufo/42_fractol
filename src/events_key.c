@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 00:39:15 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:23:24 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	reset_view(t_m *m)
 	m->img->view->scale = SCALE;
 	m->img->view->origin.x = WINDOW_W / 2;
 	m->img->view->origin.y = WINDOW_H / 2;
-	view_update(m->img);
+	view_update(m);
 	render(m);
 }
 
@@ -47,26 +47,24 @@ static void	handle_move(short is_keydown, int keycode, t_m *m)
 
 static int	handle_keydown(int keycode, t_m *m)
 {
-	printf("%d\n", keycode);
 	if (keycode == 53)
-		return (terminate(NULL), 0);
+		return (terminate(m, NULL), 0);
 	if (keycode == 8)
 		return (set_colors(m), render(m), 0);
+	if (keycode == 49)
+		return (m->is_mode_predraw = !m->is_mode_predraw, render(m), 0);
+	if (keycode == 46)
+		return (m->is_colored_by_i = !m->is_colored_by_i, render(m), 0);
 	if (keycode == 13)
 		return (zoom(m, WINDOW_W / 2, WINDOW_H / 2, 1 - ZOOM_SPEED), 0);
 	if (keycode == 1)
 		return (zoom(m, WINDOW_W / 2, WINDOW_H / 2, 1 + ZOOM_SPEED), 0);
-	if (keycode == 49)
-	{
-		m->is_mode_predraw = !m->is_mode_predraw;
-		return (render(m), 0);
-	}
 	if (keycode == 15)
 		return (reset_view(m), 0);
 	if (123 <= keycode && keycode <= 126)
 		return (handle_move(1, keycode, m), 0);
 	if (keycode == 260 || keycode == 256)
-		m->is_key.ctrl = 1;
+		return (m->is_key.ctrl = 1, 0);
 	return (0);
 }
 
@@ -81,6 +79,8 @@ static int	handle_keyup(int keycode, t_m *m)
 
 void	events_key_init(t_m *m)
 {
+	m->is_colored_by_i = 1;
+	m->is_mode_predraw = 0;
 	m->is_key.ctrl = 0;
 	m->is_key.down = 0;
 	m->is_key.left = 0;

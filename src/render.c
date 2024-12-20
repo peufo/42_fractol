@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 00:18:56 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:23:34 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	get_color(t_m *m, t_complex z)
 void	render(t_m *m)
 {
 	img_draw_square(
-		m->img,
+		m,
 		(t_dot){0, 0},
 		(t_dot){WINDOW_W, WINDOW_H},
 		0xFFFFFF);

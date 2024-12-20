@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 00:13:21 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:23:29 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	handle_mouse_move(int x, int y, t_m *m)
 		return (0);
 	m->img->view->origin.x = (x - m->grab.x);
 	m->img->view->origin.y = (y - m->grab.y);
-	view_update(m->img);
+	view_update(m);
 	render(m);
 	return (0);
 }

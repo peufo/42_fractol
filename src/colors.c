@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:58:06 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 00:18:28 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/20 01:19:36 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,22 @@ static int	compute_gradient(int color_a, int color_b, float ratio)
 int	get_gradient(t_m *m, t_bound b)
 {
 	double	magni;
+	float	i;
 
 	magni = b.magnitude;
+	i = (float)b.i;
 	if (magni < 4)
 		return (m->colors.a);
+	if (m->is_colored_by_i)
+	{
+		if (i <= 10)
+			return (compute_gradient(m->colors.e, m->colors.d, i / 10));
+		if (i <= 30)
+			return (compute_gradient(m->colors.d, m->colors.c, (i - 10) / 20));
+		if (i <= 50)
+			return (compute_gradient(m->colors.c, m->colors.b, (i - 30) / 20));
+		return (m->colors.b);
+	}
 	if (magni < 8)
 		return (compute_gradient(m->colors.b, m->colors.c, (magni - 4) / 4));
 	if (magni < 12)
