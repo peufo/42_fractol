@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 13:01:49 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/21 01:24:24 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 # include "ft_printf.h"
+# include "libft.h"
 # define WINDOW_W 800
 # define WINDOW_H 600
 # define ZOOM_SPEED 0.2
@@ -128,7 +129,7 @@ void		events_key_init(t_m *m);
 void		render(t_m *m);
 void		zoom(t_m *m, int x, int y, double z);
 void		move(t_m *m, int x, int y);
-void		fractal_set(t_m *m, int fractal_index);
+void		fractal_set(t_m *m, int fractal_num);
 
 void		img_init(t_m *m);
 void		img_put_pixel(t_m *m, int x, int y, int color);
@@ -146,6 +147,7 @@ t_bound		complex_bounded(t_m *m, t_complex z, t_complex c);
 int			limit_sup(int v, int limit);
 int			limit_inf(int v, int limit);
 double		double_limit(double v, double limit);
+float		ft_atof(char *s);
 void		set_colors(t_m *m);
 int			get_gradient(t_m *m, t_bound bound);
 

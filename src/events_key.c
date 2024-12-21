@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 12:57:35 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/21 01:52:26 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int	handle_keydown(int keycode, t_m *m)
 	if (keycode == 53)
 		return (terminate(m, NULL), 0);
 	if (keycode == 18)
-		return (fractal_set(m, 0), view_init(m), 0);
-	if (keycode == 19)
 		return (fractal_set(m, 1), view_init(m), 0);
+	if (keycode == 19)
+		return (fractal_set(m, 2), view_init(m), 0);
 	if (keycode == 8)
 		return (set_colors(m), render(m), 0);
 	if (keycode == 49)
