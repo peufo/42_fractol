@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/21 01:32:20 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/22 21:55:07 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ static int	print_help(void)
 	ft_printf("\033[1mUsage\033[0m\n");
 	ft_printf("./fractol fractal [real] [imaginary]\n");
 	ft_printf("\n\033[1mOptions\033[0m\n");
-	ft_printf("%-10s = %-7sJulia\t(z -> z^2 + c)\n", "fractal", "1");
-	ft_printf("%-10s = %-7sMandelbrot\t(z -> z^2 + z)\n", "fractal", "2");
+	ft_printf("%-10s = %-7sJulia\t(z -> z² + C)\n", "fractal", "1");
+	ft_printf("%-10s = %-7sMandelbrot\t(z -> z² + c)\n", "fractal", "2");
+	ft_printf("%-10s = %-7sMandelbrot 2\t(z -> cos(z/c))\n", "fractal", "3");
+	ft_printf("%-10s = %-7sMandelbrot 3\t(z -> sinh(z)+1/c²)\n", "fractal", "2");
 	ft_printf("%-10s = %-7s(Julia) Set real of c\n", "real", "float");
 	ft_printf("%-10s = %-7s(Julia) Set imaginary of c\n", "imaginary", "float");
 	ft_printf("\n\033[1mCommandes\033[0m\n");
@@ -65,7 +67,7 @@ static int	parse_args(t_m *m, int ac, char **av)
 	if (ac < 2 || 4 < ac)
 		return (1);
 	fractal_num = ft_atoi(av[1]);
-	if (fractal_num < 1 || 2 < fractal_num)
+	if (fractal_num < 1 || 4 < fractal_num)
 		return (1);
 	fractal_set(m, fractal_num);
 	if (fractal_num != 1 && ac > 2)
@@ -76,7 +78,6 @@ static int	parse_args(t_m *m, int ac, char **av)
 		m->c.r = ft_atof(av[2]);
 	if (ac > 3)
 		m->c.i = ft_atof(av[3]);
-	printf("prout %f\n", m->c.r);
 	return (0);
 }
 

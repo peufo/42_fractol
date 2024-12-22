@@ -8,6 +8,7 @@
     "mlx_int.h": "c",
     "stdio.h": "c",
     "sstream": "c",
-    "complex": "c"
+    "complex": "c",
+    "libft.h": "c"
   }
 }

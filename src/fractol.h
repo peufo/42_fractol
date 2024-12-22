@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/21 01:24:24 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/22 16:20:16 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_fractal
 {
 	double		scale;
 	t_dot_long	origin;
-	int			(*get_color)(t_m *m, t_complex z);
+	t_complex	(*iteration)(t_m * m, t_complex z, t_complex c);
 }	t_fractal;
 struct s_m
 {
@@ -141,8 +141,11 @@ void		view_draw(t_m *m, int (*draw)(t_m*, t_complex));
 
 t_complex	complex_add(t_complex a, t_complex b);
 t_complex	complex_multiply(t_complex a, t_complex b);
+t_complex	complex_divide(t_complex a, t_complex b);
+t_complex	complex_sinh(t_complex z);
+t_complex	complex_cos(t_complex z);
 double		complex_magnitude(t_complex z);
-t_bound		complex_bounded(t_m *m, t_complex z, t_complex c);
+t_bound		complex_bounded(t_m *m, t_complex z);
 
 int			limit_sup(int v, int limit);
 int			limit_inf(int v, int limit);

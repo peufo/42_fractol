@@ -6,46 +6,60 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:04:45 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/21 01:00:36 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/22 22:04:10 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	julia(t_m *m, t_complex z)
+static t_complex	julia(t_m *m, t_complex z, t_complex c)
 {
-	t_bound	bound;
-
-	bound = complex_bounded(m, z, m->c);
-	return (get_gradient(m, bound));
+	(void)c;
+	return (complex_add(complex_multiply(z, z), m->c));
 }
 
-static int	mandelbrot(t_m *m, t_complex z)
+static t_complex	mandelbrot(t_m *m, t_complex z, t_complex c)
 {
-	t_bound	bound;
+	(void)m;
+	return (complex_add(complex_multiply(z, z), c));
+}
 
-	bound = complex_bounded(m, z, z);
-	return (get_gradient(m, bound));
+static t_complex	mandelbrot_2(t_m *m, t_complex z, t_complex c)
+{
+	(void)m;
+	return (complex_cos(complex_divide(z, c)));
+}
+
+// cos(z)+1/c
+static t_complex	mandelbrot_3(t_m *m, t_complex z, t_complex c)
+{
+	(void)m;
+	t_complex	n;
+
+	n = complex_divide((t_complex){1, 0}, c);
+	return (complex_add(complex_cos(z), n));
 }
 
 void	fractal_set(t_m *m, int fractal_num)
 {
-	if (fractal_num < 1 || 2 < fractal_num)
+	if (fractal_num < 1 || 4 < fractal_num)
 		return (terminate(m, "fractal num invalid"));
+	m->fractal.scale = 4;
+	m->fractal.origin.x = WINDOW_W / 2;
+	m->fractal.origin.y = WINDOW_H / 2;
 	if (fractal_num == 1)
 	{
 		m->c.r = -0.75;
 		m->c.i = 0;
-		m->fractal.get_color = julia;
-		m->fractal.scale = 4;
-		m->fractal.origin.x = WINDOW_W / 2;
-		m->fractal.origin.y = WINDOW_H / 2;
+		m->fractal.iteration = julia;
 	}
 	if (fractal_num == 2)
 	{
-		m->fractal.get_color = mandelbrot;
-		m->fractal.scale = 4;
+		m->fractal.iteration = mandelbrot;
 		m->fractal.origin.x = 2 * (WINDOW_W / 3);
-		m->fractal.origin.y = WINDOW_H / 2;
 	}
+	if (fractal_num == 3)
+		m->fractal.iteration = mandelbrot_2;
+	if (fractal_num == 4)
+		m->fractal.iteration = mandelbrot_3;
 }
