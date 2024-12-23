@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 12:48:09 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:28:39 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	view_update(t_m *m)
 	}
 }
 
-static void	view_predraw(t_m *m, int (*get_color)(t_m*, t_complex))
+static void	view_predraw(t_m *m, int (*get_color)(t_m*, t_complex*))
 {
 	t_dot		r;
 	t_dot		v;
@@ -49,19 +49,19 @@ static void	view_predraw(t_m *m, int (*get_color)(t_m*, t_complex))
 	int			color;
 
 	r.x = 0;
-	while (r.x < WINDOW_W / PREDRAW_RES)
+	while (r.x < WINDOW_W / LOW_RES)
 	{
 		r.y = 0;
-		while (r.y < WINDOW_H / PREDRAW_RES)
+		while (r.y < WINDOW_H / LOW_RES)
 		{
-			v.x = r.x * PREDRAW_RES + PREDRAW_RES / 2;
-			v.y = r.y * PREDRAW_RES + PREDRAW_RES / 2;
+			v.x = r.x * LOW_RES + LOW_RES / 2;
+			v.y = r.y * LOW_RES + LOW_RES / 2;
 			z.r = m->view.x[v.x];
 			z.i = m->view.y[v.y];
-			color = get_color(m, z);
+			color = get_color(m, &z);
 			img_draw_square(m,
-				(t_dot){r.x * PREDRAW_RES, r.y * PREDRAW_RES},
-				(t_dot){PREDRAW_RES, PREDRAW_RES},
+				(t_dot){r.x * LOW_RES, r.y * LOW_RES},
+				(t_dot){LOW_RES, LOW_RES},
 				color);
 			r.y++;
 		}
@@ -69,12 +69,13 @@ static void	view_predraw(t_m *m, int (*get_color)(t_m*, t_complex))
 	}
 }
 
-void	view_draw(t_m *m, int (*get_color)(t_m*, t_complex))
+void	view_draw(t_m *m, int (*get_color)(t_m*, t_complex*))
 {
-	int		x;
-	int		y;
-	int		color;
-	t_view	*view;
+	int			x;
+	int			y;
+	int			color;
+	t_view		*view;
+	t_complex	z;
 
 	view = &m->view;
 	if (m->is_mode_predraw)
@@ -82,10 +83,12 @@ void	view_draw(t_m *m, int (*get_color)(t_m*, t_complex))
 	x = 0;
 	while (x < WINDOW_W)
 	{
+		z.r = view->x[x];
 		y = 0;
 		while (y < WINDOW_H)
 		{
-			color = get_color(m, (t_complex){view->x[x], view->y[y]});
+			z.i = view->y[y];
+			color = get_color(m, &z);
 			img_put_pixel(m, x, y, color);
 			y++;
 		}

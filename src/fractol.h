@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 13:55:52 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:27:49 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WINDOW_H 600
 # define ZOOM_SPEED 0.2
 # define MAX_ITERATION 256
-# define PREDRAW_RES 5
+# define LOW_RES 2
 
 enum
 {
@@ -138,15 +138,10 @@ void		img_draw_square(t_m *m, t_dot position, t_dot size, int color);
 
 void		view_init(t_m *m);
 void		view_update(t_m *m);
-void		view_draw(t_m *m, int (*draw)(t_m*, t_complex));
+void		view_draw(t_m *m, int (*draw)(t_m*, t_complex*));
 
-void		complex_add(t_complex *res, t_complex a, t_complex b);
-void		complex_multiply(t_complex *res, t_complex a, t_complex b);
-t_complex	complex_divide(t_complex a, t_complex b);
-t_complex	complex_sinh(t_complex z);
-t_complex	complex_cos(t_complex z);
 double		complex_magnitude(t_complex z);
-void		complex_bounded(t_bound *res, t_m *m, t_complex z);
+void		complex_bounded(t_bound *res, t_m *m, t_complex *z);
 
 int			limit_sup(int v, int limit);
 int			limit_inf(int v, int limit);
