@@ -6,15 +6,12 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 15:02:07 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:03:42 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <time.h>
 # include <math.h>
 # include <unistd.h>
 # include "mlx.h"
