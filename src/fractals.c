@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 12:04:45 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/22 22:04:10 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 11:00:34 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static t_complex	mandelbrot_2(t_m *m, t_complex z, t_complex c)
 // cos(z)+1/c
 static t_complex	mandelbrot_3(t_m *m, t_complex z, t_complex c)
 {
-	(void)m;
 	t_complex	n;
 
+	(void)m;
 	n = complex_divide((t_complex){1, 0}, c);
 	return (complex_add(complex_cos(z), n));
 }
