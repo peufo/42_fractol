@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 17:17:03 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:00:06 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@ static int	handle_mouse_move(int x, int y, t_m *m)
 		m->view.origin.x = (x - m->grab.x);
 		m->view.origin.y = (y - m->grab.y);
 		view_update(m);
-		render(m);
 	}
 	if (m->is_key.ctrl)
 	{
 		m->c.r = 0.5 * (x - (WINDOW_W / 2)) * m->view.pixel_to_view;
 		m->c.i = 0.5 * -(y - (WINDOW_H / 2)) * m->view.pixel_to_view;
-		render(m);
+		request_render(m);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:34:00 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:45:47 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	main(int ac, char **av)
 	set_colors(&m);
 	view_init(&m);
 	mlx_hook(m.win, ON_DESTROY, 0, handle_destroy, &m);
+	mlx_loop_hook(m.mlx, render, &m);
 	mlx_loop(m.mlx);
 	return (0);
 }

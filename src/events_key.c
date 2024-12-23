@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:10:33 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:00:06 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static int	handle_keydown(int keycode, t_m *m)
 	if (18 <= keycode && keycode <= 21)
 		return (fractal_set(m, keycode - 17), view_init(m), 0);
 	if (keycode == 8)
-		return (set_colors(m), render(m), 0);
+		return (set_colors(m), request_render(m), 0);
 	if (keycode == 49)
-		return (m->is_mode_predraw = !m->is_mode_predraw, render(m), 0);
+		return (m->is_low_res = !m->is_low_res, request_render(m), 0);
 	if (keycode == 46)
-		return (m->is_colored_by_i = !m->is_colored_by_i, render(m), 0);
+		return (m->is_color_i = !m->is_color_i, request_render(m), 0);
 	if (keycode == 13)
 		return (zoom(m, WINDOW_W / 2, WINDOW_H / 2, 1 - ZOOM_SPEED), 0);
 	if (keycode == 1)
@@ -72,8 +72,8 @@ static int	handle_keyup(int keycode, t_m *m)
 
 void	events_key_init(t_m *m)
 {
-	m->is_colored_by_i = 1;
-	m->is_mode_predraw = 0;
+	m->is_color_i = 1;
+	m->is_low_res = 0;
 	m->is_key.ctrl = 0;
 	m->is_key.down = 0;
 	m->is_key.left = 0;

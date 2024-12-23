@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:27:49 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:02:07 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,35 +119,37 @@ struct s_m
 	t_fractal	fractal;
 	t_keys		is_key;
 	t_complex	c;
+	short		rendering_requested;
 	short		is_mouse_grab;
-	short		is_mode_predraw;
-	short		is_colored_by_i;
+	short		is_low_res;
+	short		is_color_i;
 };
 
-void		terminate(t_m *m, char *error);
-void		events_mouse_init(t_m *m);
-void		events_key_init(t_m *m);
-void		render(t_m *m);
-void		zoom(t_m *m, int x, int y, double z);
-void		move(t_m *m, int x, int y);
-void		fractal_set(t_m *m, int fractal_num);
+void	terminate(t_m *m, char *error);
+void	events_mouse_init(t_m *m);
+void	events_key_init(t_m *m);
+int		render(t_m *m);
+int		request_render(t_m *m);
+void	zoom(t_m *m, int x, int y, double z);
+void	move(t_m *m, int x, int y);
+void	fractal_set(t_m *m, int fractal_num);
 
-void		img_init(t_m *m);
-void		img_put_pixel(t_m *m, int x, int y, int color);
-void		img_draw_square(t_m *m, t_dot position, t_dot size, int color);
+void	img_init(t_m *m);
+void	img_put_pixel(t_m *m, int x, int y, int color);
+void	img_draw_square(t_m *m, t_dot position, t_dot size, int color);
 
-void		view_init(t_m *m);
-void		view_update(t_m *m);
-void		view_draw(t_m *m, int (*draw)(t_m*, t_complex*));
+void	view_init(t_m *m);
+void	view_update(t_m *m);
+void	view_draw(t_m *m, int (*draw)(t_m*, t_complex*));
 
-double		complex_magnitude(t_complex z);
-void		complex_bounded(t_bound *res, t_m *m, t_complex *z);
+double	complex_magnitude(t_complex z);
+void	complex_bounded(t_bound *res, t_m *m, t_complex *z);
 
-int			limit_sup(int v, int limit);
-int			limit_inf(int v, int limit);
-double		double_limit(double v, double limit);
-float		ft_atof(char *s);
-void		set_colors(t_m *m);
-int			get_gradient(t_m *m, t_bound bound);
+int		limit_sup(int v, int limit);
+int		limit_inf(int v, int limit);
+double	double_limit(double v, double limit);
+float	ft_atof(char *s);
+void	set_colors(t_m *m);
+int		get_gradient(t_m *m, t_bound bound);
 
 #endif

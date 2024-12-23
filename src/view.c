@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:28:39 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:00:06 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	view_init(t_m *m)
 	m->view.scale = m->fractal.scale;
 	m->view.origin = m->fractal.origin;
 	view_update(m);
-	render(m);
 }
 
 void	view_update(t_m *m)
@@ -39,9 +38,10 @@ void	view_update(t_m *m)
 		view->y[i] = -(i - view->origin.y) * view->pixel_to_view;
 		i++;
 	}
+	request_render(m);
 }
 
-static void	view_predraw(t_m *m, int (*get_color)(t_m*, t_complex*))
+static void	view_draw_low_res(t_m *m, int (*get_color)(t_m*, t_complex*))
 {
 	t_dot		r;
 	t_dot		v;
@@ -78,8 +78,8 @@ void	view_draw(t_m *m, int (*get_color)(t_m*, t_complex*))
 	t_complex	z;
 
 	view = &m->view;
-	if (m->is_mode_predraw)
-		return (view_predraw(m, get_color));
+	if (m->is_low_res)
+		return (view_draw_low_res(m, get_color));
 	x = 0;
 	while (x < WINDOW_W)
 	{

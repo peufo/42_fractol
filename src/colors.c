@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:58:06 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:11:45 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:51:17 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	get_gradient(t_m *m, t_bound b)
 	i = (float)b.i;
 	if (magni < 4)
 		return (m->colors.a);
-	if (m->is_colored_by_i)
+	if (m->is_color_i)
 	{
 		if (i <= 10)
 			return (compute_gradient(m->colors.e, m->colors.d, i / 10));
