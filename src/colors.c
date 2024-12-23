@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:58:06 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 10:57:44 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:11:45 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	set_colors(t_m *m)
 {
 	static int	palette_index;
 
-	if (palette_index == 5)
+	if (palette_index == 6)
 		palette_index = 0;
 	m->colors = (t_colors[]){
 	{0x19381F, 0xeee82c, 0x91cb3e, 0x53a548, 0x4c934c},

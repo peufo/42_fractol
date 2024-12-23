@@ -6,16 +6,17 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/22 16:20:16 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 13:55:52 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 # include <stdio.h>
+# include <stdlib.h>
+# include <time.h>
 # include <math.h>
 # include <unistd.h>
-# include <stdlib.h>
 # include "mlx.h"
 # include "ft_printf.h"
 # include "libft.h"
@@ -105,7 +106,7 @@ typedef struct s_fractal
 {
 	double		scale;
 	t_dot_long	origin;
-	t_complex	(*iteration)(t_m * m, t_complex z, t_complex c);
+	void		(*iteration)(t_m *m, t_complex *z, t_complex *c);
 }	t_fractal;
 struct s_m
 {
@@ -139,13 +140,13 @@ void		view_init(t_m *m);
 void		view_update(t_m *m);
 void		view_draw(t_m *m, int (*draw)(t_m*, t_complex));
 
-t_complex	complex_add(t_complex a, t_complex b);
-t_complex	complex_multiply(t_complex a, t_complex b);
+void		complex_add(t_complex *res, t_complex a, t_complex b);
+void		complex_multiply(t_complex *res, t_complex a, t_complex b);
 t_complex	complex_divide(t_complex a, t_complex b);
 t_complex	complex_sinh(t_complex z);
 t_complex	complex_cos(t_complex z);
 double		complex_magnitude(t_complex z);
-t_bound		complex_bounded(t_m *m, t_complex z);
+void		complex_bounded(t_bound *res, t_m *m, t_complex z);
 
 int			limit_sup(int v, int limit);
 int			limit_inf(int v, int limit);

@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 10:59:26 by jvoisard         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:08:28 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	get_color(t_m *m, t_complex z)
 {
 	t_bound	bound;
 
-	bound = complex_bounded(m, z);
+	complex_bounded(&bound, m, z);
 	return (get_gradient(m, bound));
 }
 
