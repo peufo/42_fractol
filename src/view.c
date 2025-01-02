@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:15:01 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/02 16:00:11 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/02 16:25:31 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	view_update(t_m *m)
 	t_view	*view;
 	int		i;
 
-	view = &m->view;
+	view = &(m->view);
 	view->pixel_to_view = view->scale / m->img.pixels_per_line;
 	i = 0;
 	while (i < WINDOW_W)
