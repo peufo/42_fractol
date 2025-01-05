@@ -6,7 +6,7 @@
 /*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 14:25:29 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:48:57 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include "keys.h"
-# define WINDOW_W 800
-# define WINDOW_H 600
+# define WINDOW_W 1200
+# define WINDOW_H 800
 # define ZOOM_SPEED 0.2
 # define MAX_ITERATION 256
-# define LOW_RES 2
+# define LOW_RES 4
 
 enum
 {
@@ -141,9 +141,6 @@ void	view_init(t_m *m);
 void	view_update(t_m *m);
 void	view_draw(t_m *m, int (*draw)(t_m*, t_complex*));
 
-int		limit_sup(int v, int limit);
-int		limit_inf(int v, int limit);
-double	double_limit(double v, double limit);
 float	ft_atof(char *s);
 void	set_colors(t_m *m);
 int		get_gradient(t_m *m, t_bound bound);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
+/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:11:07 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/20 11:57:01 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:47:25 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ void	img_put_pixel(t_m *m, int x, int y, int color)
 	}
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
+}
+
+static int	limit_sup(int v, int limit)
+{
+	if (v > limit)
+		return (limit);
+	return (v);
 }
 
 void	img_draw_square(t_m *m, t_dot position, t_dot size, int color)
