@@ -6,7 +6,7 @@
 /*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 12:25:28 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 18:53:56 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	terminate(t_m *m, char *error)
 			mlx_destroy_image(m->mlx, m->img.data);
 		if (m->mlx && m->win)
 			mlx_destroy_window(m->mlx, m->win);
+		if (m->mlx)
+		{
+			mlx_destroy_display(m->mlx);
+			free(m->mlx);
+		}
 	}
 	if (error)
 	{
