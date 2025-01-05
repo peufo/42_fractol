@@ -6,7 +6,7 @@
 /*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 16:48:57 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 16:50:48 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,6 @@ enum
 	BUTTON_MIDDLE = 3,
 	BUTTON_SCROLL_UP = 4,
 	BUTTON_SCROLL_DOWN = 5
-};
-enum
-{
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
 };
 
 typedef struct s_dot
