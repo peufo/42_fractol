@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
+/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 22:50:22 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/02 15:59:35 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:25:46 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static double	complex_magnitude(t_complex z)
+{
+	return (z.r * z.r + z.i * z.i);
+}
+
+static void	complex_bounded(t_bound *res, t_m *m, t_complex *z)
+{
+	res->i = 0;
+	res->magnitude = 0;
+	res->z = *z;
+	while (res->i < MAX_ITERATION && res->magnitude < 4)
+	{
+		m->fractal.iteration(m, &(res->z), z);
+		res->magnitude = complex_magnitude(res->z);
+		res->i++;
+	}
+	return ;
+}
 
 static int	get_color(t_m *m, t_complex *z)
 {

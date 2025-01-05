@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
+/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:49:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:45:47 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 12:25:28 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	main(int ac, char **av)
 	events_key_init(&m);
 	set_colors(&m);
 	view_init(&m);
-	mlx_hook(m.win, ON_DESTROY, 0, handle_destroy, &m);
+	mlx_hook(m.win, DestroyNotify, 0, handle_destroy, &m);
 	mlx_loop_hook(m.mlx, render, &m);
 	mlx_loop(m.mlx);
 	return (0);

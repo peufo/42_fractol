@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
+/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 15:03:42 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:25:29 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FRACTOL_H
 # include <math.h>
 # include <unistd.h>
+# include <X11/X.h>
 # include "mlx.h"
 # include "ft_printf.h"
 # include "libft.h"
+# include "keys.h"
 # define WINDOW_W 800
 # define WINDOW_H 600
 # define ZOOM_SPEED 0.2
@@ -138,9 +140,6 @@ void	img_draw_square(t_m *m, t_dot position, t_dot size, int color);
 void	view_init(t_m *m);
 void	view_update(t_m *m);
 void	view_draw(t_m *m, int (*draw)(t_m*, t_complex*));
-
-double	complex_magnitude(t_complex z);
-void	complex_bounded(t_bound *res, t_m *m, t_complex *z);
 
 int		limit_sup(int v, int limit);
 int		limit_inf(int v, int limit);
