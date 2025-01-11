@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
+/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 20:58:06 by jvoisard          #+#    #+#             */
-/*   Updated: 2024/12/23 14:51:17 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/11 18:28:31 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ static int	gradient(int a, int b, float ratio)
 {
 	a = a % 256;
 	b = b % 256;
-	if (a < b)
-		return (a + ratio * (b - a));
-	return (a - ratio * (a - b));
+	return (a + ratio * (b - a));
 }
 
 static int	compute_gradient(int color_a, int color_b, float ratio)
