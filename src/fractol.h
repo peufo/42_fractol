@@ -6,7 +6,7 @@
 /*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/12 18:28:50 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:31:06 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include "constant.h"
-# define WINDOW_W 1200
-# define WINDOW_H 800
+# define WINDOW_W 600
+# define WINDOW_H 400
 # define ZOOM_SPEED 0.2
 # define MAX_ITERATION 256
 # define LOW_RES 4
