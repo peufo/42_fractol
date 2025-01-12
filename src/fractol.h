@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 12:12:05 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 16:50:48 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:28:50 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,15 @@
 # define FRACTOL_H
 # include <math.h>
 # include <unistd.h>
-# include <X11/X.h>
 # include "mlx.h"
 # include "ft_printf.h"
 # include "libft.h"
-# include "keys.h"
+# include "constant.h"
 # define WINDOW_W 1200
 # define WINDOW_H 800
 # define ZOOM_SPEED 0.2
 # define MAX_ITERATION 256
 # define LOW_RES 4
-
-enum
-{
-	BUTTON_LEFT = 1,
-	BUTTON_RIGHT = 2,
-	BUTTON_MIDDLE = 3,
-	BUTTON_SCROLL_UP = 4,
-	BUTTON_SCROLL_DOWN = 5
-};
 
 typedef struct s_dot
 {
@@ -122,6 +112,7 @@ int		request_render(t_m *m);
 void	zoom(t_m *m, int x, int y, double z);
 void	move(t_m *m, int x, int y);
 void	fractal_set(t_m *m, int fractal_num);
+void	destroy_display(t_m *m);
 
 void	img_init(t_m *m);
 void	img_put_pixel(t_m *m, int x, int y, int color);

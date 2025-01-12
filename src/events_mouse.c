@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_mouse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 12:19:48 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:05:41 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	handle_mouseup(int button, int x, int y, t_m *m)
 void	events_mouse_init(t_m *m)
 {
 	m->is_mouse_grab = 0;
-	mlx_hook(m->win, ButtonPress, ButtonPressMask, handle_mousdown, m);
-	mlx_hook(m->win, ButtonRelease, ButtonReleaseMask, handle_mouseup, m);
-	mlx_hook(m->win, MotionNotify, PointerMotionMask, handle_mouse_move, m);
+	mlx_hook(m->win, ON_MOUSEDOWN, ON_MOUSEDOWN_MASK, handle_mousdown, m);
+	mlx_hook(m->win, ON_MOUSEUP, ON_MOUSEUP_MASK, handle_mouseup, m);
+	mlx_hook(m->win, ON_MOUSEMOVE, ON_MOUSEMOVE_MASK, handle_mouse_move, m);
 }

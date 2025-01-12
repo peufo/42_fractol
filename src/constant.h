@@ -1,20 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.h                                             :+:      :+:    :+:   */
+/*   constant.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 12:26:37 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 14:27:47 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/12 18:22:44 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYS_H
-# define KEYS_H
+#ifndef CONSTANT_H
+# define CONSTANT_H
+# ifdef __linux__
+#  include <X11/X.h>
+# endif
+
+enum
+{
+	BUTTON_LEFT = 1,
+	BUTTON_RIGHT = 2,
+	BUTTON_MIDDLE = 3,
+	BUTTON_SCROLL_UP = 4,
+	BUTTON_SCROLL_DOWN = 5
+};
 
 # ifdef __APPLE__
 
+#  define ON_KEY_DOWN 2
+#  define ON_KEY_UP 3
+#  define ON_MOUSEDOWN 4
+#  define ON_MOUSEUP 5
+#  define ON_MOUSEMOVE 6
+#  define ON_EXPOSE 12
+#  define ON_DESTROY 17
+#  define ON_KEY_DOWN_MASK 0
+#  define ON_KEY_UP_MASK 0
+#  define ON_MOUSEDOWN_MASK 0
+#  define ON_MOUSEUP_MASK 0
+#  define ON_MOUSEMOVE_MASK 0
 #  define KEY_ESCAPE 53
 #  define KEY_1 18
 #  define KEY_2 19
@@ -35,6 +59,18 @@
 
 # elif __linux__
 
+#  define ON_KEY_DOWN KeyPress
+#  define ON_KEY_UP KeyRelease
+#  define ON_MOUSEDOWN ButtonPress
+#  define ON_MOUSEUP ButtonRelease
+#  define ON_MOUSEMOVE MotionNotify
+#  define ON_EXPOSE 12
+#  define ON_DESTROY DestroyNotify
+#  define ON_KEY_DOWN_MASK KeyPressMask
+#  define ON_KEY_UP_MASK KeyReleaseMask
+#  define ON_MOUSEDOWN_MASK ButtonPressMask
+#  define ON_MOUSEUP_MASK ButtonReleaseMask
+#  define ON_MOUSEMOVE_MASK PointerMotionMask
 #  define KEY_ESCAPE 65307
 #  define KEY_1 49
 #  define KEY_2 50

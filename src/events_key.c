@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_key.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvoisard <jvoisard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvoisard <jonas.voisard@gmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 20:21:31 by jvoisard          #+#    #+#             */
-/*   Updated: 2025/01/05 14:41:56 by jvoisard         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:57:35 by jvoisard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	events_key_init(t_m *m)
 	m->is_key.left = 0;
 	m->is_key.right = 0;
 	m->is_key.up = 0;
-	mlx_hook(m->win, KeyPress, KeyPressMask, handle_keydown, m);
-	mlx_hook(m->win, KeyRelease, KeyReleaseMask, handle_keyup, m);
+	mlx_hook(m->win, ON_KEY_DOWN, ON_KEY_DOWN_MASK, handle_keydown, m);
+	mlx_hook(m->win, ON_KEY_UP, ON_KEY_UP_MASK, handle_keyup, m);
 }
